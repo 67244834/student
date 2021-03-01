@@ -46,5 +46,9 @@ public class Loginhandlers {
             req.getRequestDispatcher(req.getContextPath()+"/login.jsp?error=yes").forward(req,resp);
         }
     }
-
+    @RequestMapping("/exit.do")
+    public String  exit(HttpSession session){
+        session.invalidate();
+        return "/login.jsp";
+    }
 }

@@ -15,7 +15,7 @@
     <div class="logo margin-big-left fadein-top">
         <h1><img src="../images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />学生选课系统</h1>
     </div>
-    <div class="head-l"> &nbsp;&nbsp; <a class="button button-little bg-red" href="/login.jsp"><span class="icon-power-off"></span> 退出登录</a> </div>
+    <div class="head-l"> &nbsp;&nbsp; <a class="button button-little bg-red" href="${ctx}/Login/exit.do"><span class="icon-power-off"></span> 退出登录</a> </div>
 </div>
 <div class="leftnav">
     <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>

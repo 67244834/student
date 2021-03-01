@@ -42,7 +42,7 @@ public class StudentHandler {
             edu="修改成功，请重新登录！";
         }
         request.setAttribute("edu",edu);
-        return "/student/studentpass.jsp?";
+        return "/student/studentpass.jsp";
     }
 
     @RequestMapping("/selectAllCourse.do")
