@@ -78,7 +78,7 @@
                 success:function (data) {
                     if (data == "1") {
                         alert("修改成功！");
-                        window.top.location.href="/login.jsp";
+                        window.top.location.href="/Login/exit.do";
                     }
                     else {
                         alert('修改失败！请检查是否输入错误！');

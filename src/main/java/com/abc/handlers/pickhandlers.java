@@ -96,7 +96,7 @@ public class pickhandlers {
         if(password.equals(mpass)){
             if(newpass.equals(renewpass)){
                 service.midifytpassword(newpass,tid);
-                resp.getWriter().println("<script language='javascript'>alert('修改密码成功，请重新登录！！');window.top.location.href = '/login.jsp';</script>");
+                resp.getWriter().println("<script language='javascript'>alert('修改密码成功，请重新登录！！');window.top.location.href = '/Login/exit.do';</script>");
             }else{
                 resp.getWriter().println("<script language='javascript'>alert('两次密码输入不一致，请重新输入！！');window.history.back(-1);</script>");
             }

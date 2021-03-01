@@ -18,7 +18,7 @@
     %>
     <script type="text/javascript" language="javascript">
         alert("<%=errorInfo%>");                                            // 弹出错误信息
-        window.top.location='/login.jsp' ;                            // 跳转到登录界面
+        window.top.location='/Login/exit.do' ;                            // 跳转到登录界面
     </script>
     <%
         }else {
