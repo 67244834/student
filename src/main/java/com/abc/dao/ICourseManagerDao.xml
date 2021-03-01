@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.ICourseManagerDao">
+
+    <select id="selectAllCount" resultType="int">
+        select count(*) from  course
+
+    </select>
+
+    <select id="selectCount1" resultType="int">
+        select count(*) from  course where cname = #{cname}
+    </select>
+
+    <select id="selectCount2" resultType="int">
+        select count(*) from  course  WHERE cname LIKE '%' #{cname} '%'
+    </select>
+
+    <insert id="insertCourse">
+    insert into course(cid,cname,tid) value (#{cid},#{cname},#{tid})
+    </insert>
+
+    <insert id="insertCourse1">
+    insert into course(cid,cname) value (#{cid},#{cname})
+    </insert>
+
+
+    <select id="selectCoursemessage" resultType="Course">
+        select cid,cname,tid from course
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectCoursemessage1" resultType="Course">
+       select cid,cname,tid from course
+              where cname = #{sname}
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectCoursemessage2" resultType="Course">
+        select cid,cname,tid from course
+        WHERE cname LIKE '%' #{sname} '%'
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <delete id="deleteCourseById">
+        delete from course where cid=#{cid}
+    </delete>
+
+    <select id="selectCourseById" resultType="Course">
+        select cid,cname,tid from course where cid=#{cid}
+    </select>
+
+    <update id="updateCourseById">
+        update course set cname=#{cname},tid=#{tid} where cid = #{cid}
+    </update>
+
+</mapper>

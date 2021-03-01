@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.IStudentDao">
+
+    <select id="selectStudentById" resultType="Student">
+        select * from student where sid=#{id}
+    </select>
+
+    <update id="updateStudentId" parameterType="Student">
+        update student set
+        sname=#{sname},sex=#{sex},tel=#{tel},school=#{school},garde=#{garde},address=#{address},age=#{age},education=#{education}
+        where sid=#{sid}
+    </update>
+
+    <update id="updatePassword">
+        update student set password=#{password} where sid=#{sid}
+    </update>
+
+    <resultMap id="selectAllCourseResultMap" type="Course">
+        <id column="cid" property="cid"/>
+        <result column="cname" property="cname"/>
+        <result column="tid" property="tid"/>
+        <result column="score" property="score"/>
+        <collection property="teachers" ofType="Teacher">
+            <id column="tid" property="tid"/>
+            <result column="tname" property="tname"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllCourse" resultMap="selectAllCourseResultMap">
+        select cid,cname,tname from course,teacher
+        where course.tid=teacher.tid
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectCourseCount" resultType="int">
+        select count(*) from course,teacher
+        where course.tid=teacher.tid
+    </select>
+
+    <select id="selectSCCidBySid" resultType="String">
+        select cid from sc where sid =#{id}
+    </select>
+
+    <insert id="saveStudentCourse">
+        insert into sc(sid,cid) values (#{id},#{cid})
+    </insert>
+
+    <select id="findSCByid" resultType="String">
+        select cid from sc where sid=#{id}
+    </select>
+
+    <resultMap id="StudentMapper" type="Student">
+        <id column="sid" property="sid"/>
+        <result column="sname" property="sname"/>
+        <collection property="courses" ofType="Course">
+            <id column="cid" property="cid"/>
+            <result column="cname" property="cname"/>
+            <result column="tid" property="tid"/>
+            <result column="score" property="score"/>
+            <collection property="teachers" ofType="Teacher">
+                <id column="tid" property="tid"/>
+                <result column="tname" property="tname"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="selectStudentCourseById" resultMap="StudentMapper">
+        select student.sid,sname,course.cid,cname,course.tid,score,tname
+        from student,course,sc,teacher
+        where student.sid=sc.sid and course.cid=sc.cid and teacher.tid=course.tid  and student.sid=#{id}
+        limit #{page.pageStartIndex},#{page.pageSize}
+    </select>
+
+    <select id="selectSCCount" resultType="int">
+         select count(*)
+        from student,course,sc,teacher
+        where student.sid=sc.sid and course.cid=sc.cid and teacher.tid=course.tid  and student.sid=#{id}
+    </select>
+
+    <delete id="deleteStudentSC">
+        delete from sc where sid=#{id}and cid=#{cid}
+    </delete>
+
+</mapper>

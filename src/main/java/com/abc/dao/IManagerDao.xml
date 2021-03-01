@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.IManagerDao">
+    <update id="updatepassword">
+        update manager set password = #{password} where mid = #{mid}
+    </update>
+    <select id="selectmessage" resultType="Manager">
+        select mname,sex,age,tel,position from manager where mid = #{mid}
+    </select>
+
+    <update id="updatemessage">
+        update manager set mname = #{mname},sex=#{sex},age=#{age},tel=#{tel} where mid = #{mid}
+    </update>
+</mapper>

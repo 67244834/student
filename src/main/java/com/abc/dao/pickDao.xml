@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.pickDao">
+    <select id="selectAllCourse" resultType="Course">
+        select cid,cname,tid from course limit #{pageStartIndex},#{pageSize}
+    </select>
+    <select id="selectAllCount" resultType="int">
+        select count(*) from course
+    </select>
+    <select id="selectpickCount" resultType="int">
+        select count(*) from course where tid = #{tid}
+    </select>
+    <select id="selectpickCourse" resultType="Course">
+        select cid,cname,tid from course where tid = #{tid} limit #{page.pageStartIndex},#{page.pageSize}
+    </select>
+    <update id="updatepickCourse">
+        update course set tid = #{tid} where cid = #{cid}
+    </update>
+    <update id="updatepick">
+        update course set tid = null where cid = #{cid}
+    </update>
+    <update id="uptpassword">
+        update teacher set password = #{password} where tid = #{tid}
+    </update>
+    <update id="upTeacher">
+        update teacher set tname = #{tname},school =#{school},age = #{age},tel = #{tel},education = #{education},sex = #{sex},address=#{address},worktime=#{worktime} where tid=#{tid}
+    </update>
+    <select id="selectTeacher" resultType="Teacher">
+      select * from teacher where tid = #{tid}
+    </select>
+    <select id="selectStudent" resultMap="TeacherMapper">
+       select teacher.tid,tname,course.cid,cname,sc.sid,score,sname
+        from student,course,sc,teacher
+        where student.sid=sc.sid
+        and course.cid=sc.cid
+        and course.tid=#{tid} limit #{page.pageStartIndex},#{page.pageSize}
+    </select>
+    <select id="selectStudentCount" resultType="int">
+        select count(*)
+        from student,course,sc,teacher
+        where student.sid=sc.sid
+        and course.cid=sc.cid
+        and course.tid=#{tid};
+    </select>
+    <insert id="upScore">
+        update sc set score = #{score} where sid = #{sid} and cid = #{cid};
+    </insert>
+    <resultMap id="TeacherMapper" type="Teacher">
+        <id column="tid" property="tid"/>
+        <result column="tname" property="tname"/>
+        <collection property="students" ofType="Student" >
+            <id column="sid" property="sid"/>
+            <result column="sname" property="sname"/>
+          <collection property="courses" ofType="Course">
+              <id column="cid" property="cid"/>
+              <result column="cname" property="cname"/>
+              <result column="tid" property="tid"/>
+              <result column="score" property="score"/>
+          </collection>
+        </collection>
+    </resultMap>
+
+</mapper>

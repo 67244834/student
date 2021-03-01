@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.ITeacherManagerDao">
+
+    <select id="selectAllCount" resultType="int">
+        select count(*) from  teacher
+
+    </select>
+
+    <select id="selectCount1" resultType="int">
+        select count(*) from  teacher where tname = #{tname}
+    </select>
+
+    <select id="selectCount2" resultType="int">
+        select count(*) from  teacher  WHERE tname LIKE '%' #{tname} '%'
+    </select>
+
+    <insert id="insertTeacher">
+    insert into teacher(tid,tname,password,sex,tel,school,worktime,address,age,education) value (#{tid},#{tname},#{password},#{sex},#{tel},#{school},#{worktime},#{address},#{age},#{education})
+    </insert>
+
+
+    <select id="selectTeachermessage" resultType="Teacher">
+        select tid,tname,sex,school,worktime from teacher
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectTeachermessage1" resultType="Teacher">
+       select tid,tname,sex,school,worktime from teacher
+              where tname = #{sname}
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectTeachermessage2" resultType="Teacher">
+        select tid,tname,sex,school,worktime from teacher
+        WHERE tname LIKE '%' #{sname} '%'
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <delete id="deleteTeacherById">
+        delete from teacher where tid=#{tid}
+    </delete>
+
+    <select id="selectTeacherById" resultType="Teacher">
+        select tid,tname,password,sex,tel,school,worktime,address,age,education from teacher where tid=#{tid}
+    </select>
+
+    <update id="updateTeacherById">
+        update teacher set tname=#{tname},sex=#{sex},tel=#{tel},school=#{school},worktime=#{worktime},address=#{address},age=#{age},education=#{education} where tid = #{tid}
+    </update>
+
+</mapper>

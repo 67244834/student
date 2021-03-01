@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.IStudentManagerDao">
+
+    <select id="selectAllCount" resultType="int">
+        select count(*) from  student
+
+    </select>
+
+    <select id="selectCount1" resultType="int">
+        select count(*) from  student where sname = #{sname}
+    </select>
+
+    <select id="selectCount2" resultType="int">
+        select count(*) from  student  WHERE sname LIKE '%' #{sname} '%'
+    </select>
+
+    <insert id="insertStudent">
+    insert into student(sid,sname,password,sex,tel,school,garde,address,age,education) value (#{sid},#{sname},#{password},#{sex},#{tel},#{school},#{garde},#{address},#{age},#{education})
+    </insert>
+
+
+    <select id="selectStudentmessage" resultType="Student">
+        select sid,sname,sex,school,garde from student
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectStudentmessage1" resultType="Student">
+        select sid,sname,sex,school,garde from student
+              where sname = #{sname}
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <select id="selectStudentmessage2" resultType="Student">
+        select sid,sname,sex,school,garde from student
+        WHERE sname LIKE '%' #{sname} '%'
+        limit #{pageStartIndex},#{pageSize}
+    </select>
+
+    <delete id="deleteStudentById">
+        delete from student where sid=#{sid}
+    </delete>
+
+    <select id="selectStudentById" resultType="Student">
+        select sid,sname,password,sex,tel,school,garde,address,age,education from student where sid=#{sid}
+    </select>
+
+    <update id="updateStudentById">
+        update student set sname=#{sname},sex=#{sex},tel=#{tel},school=#{school},garde=#{garde},address=#{address},age=#{age},education=#{education} where sid = #{sid}
+    </update>
+</mapper>

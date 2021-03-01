@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注册平台事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+<!--    &lt;!&ndash;注册事务通知&ndash;&gt;
+    <tx:advice id="txAdivce" transaction-manager="transactionManager">
+        <tx:attributes>
+            &lt;!&ndash;为连接点方式设置事务属性&ndash;&gt;
+            <tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="remove*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="modify*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="find*" isolation="DEFAULT" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    &lt;!&ndash;AOP配置&ndash;&gt;
+    <aop:config>
+        &lt;!&ndash;指定切入点&ndash;&gt;
+        <aop:pointcut id="myPointcut" expression="execution(* *..service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdivce" pointcut-ref="myPointcut"/>
+    </aop:config>-->
+</beans>
